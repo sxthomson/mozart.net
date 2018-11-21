@@ -24,21 +24,21 @@ namespace Mozart.Composition.AspNetCore.Mvc.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddViewModelCompositionMvcSupport(this IServiceCollection serviceCollection, string assemblySearchPattern = "*ViewModelComposition*.dll")
+        public static IServiceCollection AddMozartMvcComposition(this IServiceCollection serviceCollection, string assemblySearchPattern = "*ModelComposition*.dll")
         {
             var fileNames = Directory.GetFiles(AppContext.BaseDirectory, assemblySearchPattern);
             
-            // Register the IComposeViewModel<> types
-            var composeViewModelTypes = serviceCollection.AddViewModelComposition(fileNames);
+            // Register the IComposeModel<> types
+            var composeModelTypes = serviceCollection.AddMozartModelComposition(fileNames);
 
             // Register a default CompositionResultHandler to handle our composite view models 
             serviceCollection.AddSingleton(typeof(IHandleResult<>), typeof(CompositionResultHandler<>));
 
-            // Register an EntireResultHandler for each IComposeViewModel<T> - this allows each handler to be invoked directly if we only want to return a single property
-            foreach (var type in composeViewModelTypes)
+            // Register an EntireResultHandler for each IComposeModel<T> - this allows each handler to be invoked directly if we only want to return a single property
+            foreach (var type in composeModelTypes)
             {
                 // Get the implemented generic types so we can register the strongly typed service
-                var genericArguments = type.GetImplementedGenericArgumentsForInterface(typeof(IComposeViewModel<>)).ToArray();
+                var genericArguments = type.GetImplementedGenericArgumentsForInterface(typeof(IComposeModel<>)).ToArray();
                 var registeredType = typeof(IHandleResult<>).MakeGenericType(genericArguments);
                 var handlerConcreteType = typeof(EntireResultHandler<>).MakeGenericType(genericArguments);
                 serviceCollection.AddSingleton(registeredType, handlerConcreteType);                
@@ -61,7 +61,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.DependencyInjection
         {
             serviceCollection.AddSingleton<IActionDescriptorReturnTypeProvider<ControllerActionDescriptor>, ControllerActionDescriptorReturnTypeProvider>();
             serviceCollection.AddSingleton<IPredicate<ControllerActionDescriptor>, ControllerActionDescriptorHttpGetPredicateWrapper>();
-            serviceCollection.AddSingleton<IServiceResolver<string, IHandleResult>, CompositionResultHandlerResolver>();
+            serviceCollection.AddSingleton<ICachedServiceResolver<string, IHandleResult>, CompositionResultHandlerResolver>();
         }
 
         private static void RegisterActionReturnTypeStrategyServices(IServiceCollection serviceCollection)

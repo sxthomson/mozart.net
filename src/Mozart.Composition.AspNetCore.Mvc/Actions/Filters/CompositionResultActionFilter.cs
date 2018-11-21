@@ -10,9 +10,9 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Filters
 {
     public class CompositionResultActionFilter : IAsyncActionFilter
     {
-        private readonly IServiceResolver<string, IHandleResult> _resultHandlerResolver;
+        private readonly ICachedServiceResolver<string, IHandleResult> _resultHandlerResolver;
 
-        public CompositionResultActionFilter(IServiceResolver<string, IHandleResult> resultHandlerResolver)
+        public CompositionResultActionFilter(ICachedServiceResolver<string, IHandleResult> resultHandlerResolver)
         {
             _resultHandlerResolver = resultHandlerResolver;        
         }
@@ -41,25 +41,25 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Filters
             }
         }
 
-        private static void ApplyResultToContext(ActionExecutedContext context, (object ViewModel, int StatusCode) result)
+        private static void ApplyResultToContext(ActionExecutedContext context, (object Model, int StatusCode) result)
         {
             // TODO - replace with strategy pattern            
             if (context.Result is ViewResult viewResult && viewResult.ViewData.Model == null)
             {
                 //MVC
-                viewResult.ViewData.Model = result.ViewModel;
+                viewResult.ViewData.Model = result.Model;
                 viewResult.StatusCode = result.StatusCode;
             }
             else if (context.Result is ObjectResult objectResult && objectResult.Value == null)
             {
                 //WebAPI
-                objectResult.Value = result.ViewModel;
+                objectResult.Value = result.Model;
                 objectResult.StatusCode = result.StatusCode;
 
             }
             else if (context.Result != null)
             {
-                var statusCodeResult = new ObjectResult(result.ViewModel) { StatusCode = result.StatusCode };
+                var statusCodeResult = new ObjectResult(result.Model) { StatusCode = result.StatusCode };
                 context.Result = statusCodeResult;
             }
         }

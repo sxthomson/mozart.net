@@ -6,7 +6,7 @@ using Mozart.Composition.AspNetCore.Mvc.Actions.ReturnTypes.Strategies;
 using Shouldly;
 using Xunit;
 
-namespace Composition.Demo.ViewModelComposition.WebApi.UnitTests.Actions.ReturnTypes.Strategies
+namespace Mozart.Composition.AspNetCore.Mvc.UnitTests.Actions.ReturnTypes.Strategies
 {
     public class DefaultActionResultReturnTypeStrategyShould
     {

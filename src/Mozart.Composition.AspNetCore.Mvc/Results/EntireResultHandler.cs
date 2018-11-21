@@ -9,22 +9,23 @@ namespace Mozart.Composition.AspNetCore.Mvc.Results
 {
     public class EntireResultHandler<T> : EntireResultHandlerBase<T> where T : class
     {
-        private readonly IServiceResolver<Type, IComposeViewModel> _viewModelCompositionServiceResolver;
+        private readonly ICachedServiceResolver<Type, IComposeModel> _modelCompositionCachedServiceResolver;
 
-        public EntireResultHandler(IServiceResolver<Type, IComposeViewModel> viewModelCompositionServiceResolver)
+        public EntireResultHandler(ICachedServiceResolver<Type, IComposeModel> modelCompositionCachedServiceResolver)
         {
             // The custom resolver that will get our view model composition services by property type
-            _viewModelCompositionServiceResolver = viewModelCompositionServiceResolver;
+            _modelCompositionCachedServiceResolver = modelCompositionCachedServiceResolver;
         }
 
-        public override async Task<(T ViewModel, int StatusCode)> HandleOfT(HttpContext context)
+        public override async Task<(T Model, int StatusCode)> HandleOfT(HttpContext context)
         {
-            if (!_viewModelCompositionServiceResolver.TryResolve(typeof(T), out var entireViewModelHandler))
+            // Leverage the IComposeModel implementation to create an entire result
+            if (!_modelCompositionCachedServiceResolver.TryResolve(typeof(T), out var composeModel))
             {
                 return (null, StatusCodes.Status404NotFound);
             }
 
-            var result = (T) await entireViewModelHandler.ComposeViewModel(context.GetRouteData().Values);
+            var result = (T) await composeModel.Compose(context.GetRouteData().Values);
             return (result, StatusCodes.Status200OK);
         }
     }

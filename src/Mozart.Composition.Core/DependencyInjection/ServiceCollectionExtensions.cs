@@ -12,61 +12,61 @@ namespace Mozart.Composition.Core.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IEnumerable<Type> AddViewModelComposition(this IServiceCollection services,
-            string assemblySearchPattern = "*ViewModelComposition*.dll")
+        public static IEnumerable<Type> AddMozartModelComposition(this IServiceCollection services,
+            string assemblySearchPattern = "*ModelComposition*.dll")
         {
             var fileNames = Directory.GetFiles(AppContext.BaseDirectory, assemblySearchPattern);
 
             services.AddServiceResolvers();
 
-            return services.AddComposeViewModels(fileNames);
+            return services.RegisterComposeModels(fileNames);
         }
 
-        public static IEnumerable<Type> AddViewModelComposition(this IServiceCollection services,
+        public static IEnumerable<Type> AddMozartModelComposition(this IServiceCollection services,
             IEnumerable<string> fileNames, bool scanForServices = true)
         {
             services.AddServiceResolvers();
-            return services.AddComposeViewModels(fileNames);
+            return services.RegisterComposeModels(fileNames);
         }
 
-        public static void AddDependentServicesForViewModelComposition(this IServiceCollection services, IConfiguration configuration, string assemblySearchPattern = "*ViewModelComposition*.dll")
+        public static void AddDependentServicesForModelComposition(this IServiceCollection services, IConfiguration configuration, string assemblySearchPattern = "*ModelComposition*.dll")
         {
             var fileNames = Directory.GetFiles(AppContext.BaseDirectory, assemblySearchPattern);
 
-            RegisterViewModelCompositionServices(services, configuration, fileNames);
+            RegisterModelCompositionServices(services, configuration, fileNames);
         }
 
-        private static IEnumerable<Type> AddComposeViewModels(this IServiceCollection services, IEnumerable<string> fileNames)
+        private static IEnumerable<Type> RegisterComposeModels(this IServiceCollection services, IEnumerable<string> fileNames)
         {
-            var composeViewModelTypes = new List<Type>();
+            var composeModelTypes = new List<Type>();
             foreach (var fileName in fileNames)
             {
                 var temp = AssemblyLoader.Load(fileName)
                     .GetTypes()
-                    .Where(t => t.IsConcreteAndAssignableFrom(typeof(IComposeViewModel<>)));
+                    .Where(t => t.IsConcreteAndAssignableFrom(typeof(IComposeModel<>)));
 
-                composeViewModelTypes.AddRange(temp);
+                composeModelTypes.AddRange(temp);
             }
 
-            foreach (var type in composeViewModelTypes)
+            foreach (var type in composeModelTypes)
             {
                 // Get the implemented generic types so we can register the strongly typed service
-                var genericArguments = type.GetImplementedGenericArgumentsForInterface(typeof(IComposeViewModel<>));
-                var registeredType = typeof(IComposeViewModel<>).MakeGenericType(genericArguments.ToArray());
+                var genericArguments = type.GetImplementedGenericArgumentsForInterface(typeof(IComposeModel<>));
+                var registeredType = typeof(IComposeModel<>).MakeGenericType(genericArguments.ToArray());
                 services.AddSingleton(registeredType, type);
-                services.AddSingleton(typeof(IComposeViewModel), type);
+                services.AddSingleton(typeof(IComposeModel), type);
             }
 
-            return composeViewModelTypes;
+            return composeModelTypes;
         }
 
         private static void AddServiceResolvers(this IServiceCollection services)
         {
-            // This service is purely responsible for caching the non-generic IComposeViewModel service to a known type to prevent further reflection at runtime
-            services.AddSingleton<IServiceResolver<Type, IComposeViewModel>, ComposeViewModelResolver>();
+            // This service is purely responsible for caching the non-generic IComposeModel service to a known type to prevent further reflection at runtime
+            services.AddSingleton<ICachedServiceResolver<Type, IComposeModel>, ComposeModelResolver>();
         }
 
-        private static void RegisterViewModelCompositionServices(this IServiceCollection services, IConfiguration configuration, IEnumerable<string> fileNames)
+        private static void RegisterModelCompositionServices(this IServiceCollection services, IConfiguration configuration, IEnumerable<string> fileNames)
         {
             const string serviceCollectionExtensions = "ServiceCollectionExtensions";
             const string registerServices = "RegisterServices";

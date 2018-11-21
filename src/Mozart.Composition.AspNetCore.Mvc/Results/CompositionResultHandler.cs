@@ -10,30 +10,30 @@ using Mozart.Composition.Core.Abstractions;
 
 namespace Mozart.Composition.AspNetCore.Mvc.Results
 {
-    public class CompositionResultHandler<TViewModel> : CompositionResultHandlerBase<TViewModel> where TViewModel : class, new()
+    public class CompositionResultHandler<TModel> : CompositionResultHandlerBase<TModel> where TModel : class, new()
     {
-        private readonly IServiceResolver<Type, IComposeViewModel> _viewModelComposerResolver;
+        private readonly ICachedServiceResolver<Type, IComposeModel> _modelComposerResolver;
         private readonly IEnumerable<PropertyInfo> _cachedPropertyInfos;
 
-        public CompositionResultHandler(IServiceResolver<Type, IComposeViewModel> viewModelComposerResolver)
+        public CompositionResultHandler(ICachedServiceResolver<Type, IComposeModel> modelComposerResolver)
         {
             // The custom resolver that will get our view model composition services by property type
-            _viewModelComposerResolver = viewModelComposerResolver;
+            _modelComposerResolver = modelComposerResolver;
 
             // Do the expensive reflection piece when this class is instantiated (as a singleton), ideally before serving requests
-            _cachedPropertyInfos = typeof(TViewModel).GetProperties().Where(x => x.CanRead && x.CanWrite);
+            _cachedPropertyInfos = typeof(TModel).GetProperties().Where(x => x.CanRead && x.CanWrite);
         }
 
-        public override async Task<(TViewModel ViewModel, int StatusCode)> HandleOfT(HttpContext context)
+        public override async Task<(TModel Model, int StatusCode)> HandleOfT(HttpContext context)
         {
-            var result = new TViewModel();
+            var result = new TModel();
 
             var pending = new List<Task>();
 
             foreach (var cachedPropertyInfo in _cachedPropertyInfos)
             {
-                // Find a IComposeViewModel that can service this particular property type
-                if (!_viewModelComposerResolver.TryResolve(cachedPropertyInfo.PropertyType, out var composer))
+                // Find a IComposeModel that can service this particular property type
+                if (!_modelComposerResolver.TryResolve(cachedPropertyInfo.PropertyType, out var composer))
                 {
                     //Log a warning 
                     continue;
@@ -51,10 +51,10 @@ namespace Mozart.Composition.AspNetCore.Mvc.Results
             return (result, StatusCodes.Status200OK);
         }
 
-        private static async Task AssignPropertyFromComposer(IComposeViewModel composer, PropertyInfo cachedPropertyInfo,
-            TViewModel result, IDictionary<string, object> routeParameters)
+        private static async Task AssignPropertyFromComposer(IComposeModel composer, PropertyInfo cachedPropertyInfo,
+            TModel result, IDictionary<string, object> routeParameters)
         {
-            var propertyValue = await composer.ComposeViewModel(routeParameters);
+            var propertyValue = await composer.Compose(routeParameters);
             cachedPropertyInfo.SetValue(result, propertyValue);
         }
     }

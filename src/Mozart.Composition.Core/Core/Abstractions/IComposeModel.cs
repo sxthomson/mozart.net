@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Mozart.Composition.Core.Abstractions
 {
-    public interface IComposeViewModel
+    public interface IComposeModel
     { 
-        Task<object> ComposeViewModel(IDictionary<string, object> parameters);
+        Task<object> Compose(IDictionary<string, object> parameters);
     }
 }

@@ -8,10 +8,10 @@ namespace Mozart.Composition.AspNetCore.Mvc.Builder
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder WarmupViewModelComposition(this IApplicationBuilder builder)
+        public static IApplicationBuilder WarmupMozartModelComposition(this IApplicationBuilder builder)
         {
-            builder.ApplicationServices.GetService<IServiceResolver<string, IHandleResult>>();
-            builder.ApplicationServices.GetService<IServiceResolver<Type, IComposeViewModel>>();
+            builder.ApplicationServices.GetService<ICachedServiceResolver<string, IHandleResult>>();
+            builder.ApplicationServices.GetService<ICachedServiceResolver<Type, IComposeModel>>();
             return builder;
         }
     }

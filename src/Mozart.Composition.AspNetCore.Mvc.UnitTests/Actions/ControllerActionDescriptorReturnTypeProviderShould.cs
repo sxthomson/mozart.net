@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Composition.Demo.ViewModelComposition.WebApi.UnitTests.Fakes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -10,10 +9,11 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Moq;
 using Mozart.Composition.AspNetCore.Mvc.Actions;
 using Mozart.Composition.AspNetCore.Mvc.Actions.ReturnTypes.Abstractions;
+using Mozart.Composition.AspNetCore.Mvc.UnitTests.Fakes;
 using Shouldly;
 using Xunit;
 
-namespace Composition.Demo.ViewModelComposition.WebApi.UnitTests.Actions
+namespace Mozart.Composition.AspNetCore.Mvc.UnitTests.Actions
 {
     public class ControllerActionDescriptorReturnTypeProviderShould
     {

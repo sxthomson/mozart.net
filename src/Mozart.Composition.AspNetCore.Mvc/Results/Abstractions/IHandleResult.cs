@@ -5,6 +5,6 @@ namespace Mozart.Composition.AspNetCore.Mvc.Results.Abstractions
 {
     public interface IHandleResult
     {
-        Task<(object ViewModel, int StatusCode)> Handle(HttpContext context);
+        Task<(object Model, int StatusCode)> Handle(HttpContext context);
     }
 }

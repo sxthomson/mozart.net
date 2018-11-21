@@ -9,7 +9,7 @@ using Mozart.Composition.AspNetCore.Mvc.Actions.ReturnTypes.Strategies.Abstracti
 using Shouldly;
 using Xunit;
 
-namespace Composition.Demo.ViewModelComposition.WebApi.UnitTests.Actions.ReturnTypes
+namespace Mozart.Composition.AspNetCore.Mvc.UnitTests.Actions.ReturnTypes
 {
     public class ActionReturnTypeResolverShould
     {

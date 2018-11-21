@@ -9,7 +9,7 @@ using Mozart.Composition.Core.Abstractions;
 
 namespace Mozart.Composition.AspNetCore.Mvc.Results
 {
-    public class CompositionResultHandlerResolver : IServiceResolver<string, IHandleResult>
+    public class CompositionResultHandlerResolver : ICachedServiceResolver<string, IHandleResult>
     {
         private readonly IDictionary<string, IHandleResult> _cachedResultHandlers =
             new ConcurrentDictionary<string, IHandleResult>();

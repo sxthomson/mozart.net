@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Composition.Demo.ViewModelComposition.WebApi.UnitTests.Fakes
+namespace Mozart.Composition.AspNetCore.Mvc.UnitTests.Fakes
 {
     // Simplify mocking MethodInfo and Attributes by providing known fakes to use
     // when tests are invoked.
