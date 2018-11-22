@@ -12,7 +12,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Filters
     {
         private readonly ICachedServiceResolver<string, IHandleResult> _resultHandlerResolver;
 
-        public CompositionResultActionFilter(ICachedServiceResolver<string, IHandleResult> resultHandlerResolver)
+        internal CompositionResultActionFilter(ICachedServiceResolver<string, IHandleResult> resultHandlerResolver)
         {
             _resultHandlerResolver = resultHandlerResolver;        
         }
