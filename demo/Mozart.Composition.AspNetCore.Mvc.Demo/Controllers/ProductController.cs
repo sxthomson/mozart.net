@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Mozart.Composition.AspNetCore.Mvc.Actions.Filters;
 using Mozart.Composition.AspNetCore.Mvc.Demo.Models;
 
 namespace Mozart.Composition.AspNetCore.Mvc.Demo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [MozartComposeModel]
     public class ProductController : ControllerBase
     {
         // GET: api/<controller>/{id}/IActionResult
