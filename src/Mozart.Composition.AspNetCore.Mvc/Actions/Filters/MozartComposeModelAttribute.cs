@@ -12,12 +12,15 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Filters
     ///  Tell Mozart to intercept the result for this action and auto compose based on the declared type.
     ///  Requires resolved services so you should make use of <see cref="TypeFilterAttribute"/> or <seealso cref="ServiceFilterAttribute"/>.
     ///  </summary>
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class MozartComposeModelAttribute : Attribute, IFilterFactory
-    {
-        
+    {        
         public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
+            if (serviceProvider == null)
+            {
+                throw new ArgumentNullException($"{nameof(serviceProvider)}");
+            }
             var cachedServiceResolver = serviceProvider.GetService<ICachedServiceResolver<string, IHandleResult>>();
             if (cachedServiceResolver == null)
             {
