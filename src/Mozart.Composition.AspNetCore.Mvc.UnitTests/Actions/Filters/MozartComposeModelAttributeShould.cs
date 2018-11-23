@@ -68,7 +68,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.UnitTests.Actions.Filters
         }
 
         [Fact]
-        public void BeReusable()
+        public void BeReusableAsItIsNotStateful()
         {
             _mozartComposeModelAttribute.IsReusable.ShouldBeTrue();
         }
