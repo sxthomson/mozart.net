@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DockerTargetOS>Linux</DockerTargetOS>
+    <UserSecretsId>a36e44ce-e760-4dab-91f2-121ae5bffb55</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Mozart.Composition.AspNetCore.Mvc\Mozart.Composition.AspNetCore.Mvc.csproj" />
+    <ProjectReference Include="..\Mozart.Composition.ModelComposition.Details\Mozart.Composition.ModelComposition.Details.csproj" />
+    <ProjectReference Include="..\Mozart.Composition.ModelComposition.Pricing\Mozart.Composition.ModelComposition.Pricing.csproj" />
+    <ProjectReference Include="..\Mozart.Composition.ModelComposition.Stock\Mozart.Composition.ModelComposition.Stock.csproj" />
+  </ItemGroup>
+
+</Project>
