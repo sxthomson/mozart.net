@@ -8,10 +8,18 @@ using Mozart.Composition.AspNetCore.Mvc.Actions.Predicates.Abstractions;
 namespace Mozart.Composition.AspNetCore.Mvc.Actions.Predicates
 {
     public class ControllerActionDescriptorHttpGetPredicateWrapper : IPredicate<ControllerActionDescriptor>
-    {        
+    {
         public Func<ControllerActionDescriptor, bool> Predicate => x =>
-            x.ActionConstraints.Any(ac =>
+        {
+            if (x.ActionConstraints == null || x.ActionConstraints.Any(ac =>
+                    ac.GetType() == typeof(HttpMethodActionConstraint)))
+            {
+                return true; // Assume this route can be accessed via GET
+            }
+
+            return x.ActionConstraints.Any(ac =>
                 ac.GetType() == typeof(HttpMethodActionConstraint) &&
-                ((HttpMethodActionConstraint) ac).HttpMethods.Any(HttpMethods.IsGet));
+                ((HttpMethodActionConstraint)ac).HttpMethods.Any(HttpMethods.IsGet));
+        };
     }
 }

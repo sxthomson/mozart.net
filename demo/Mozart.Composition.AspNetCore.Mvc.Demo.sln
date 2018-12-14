@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.AspNetCore.Mvc.Demo", "Mozart.Composition.AspNetCore.Mvc.Demo\Mozart.Composition.AspNetCore.Mvc.Demo.csproj", "{9FDBCF9B-A73E-4B06-AE60-3AAB3B96DBA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.AspNetCore.Mvc", "..\src\Mozart.Composition.AspNetCore.Mvc\Mozart.Composition.AspNetCore.Mvc.csproj", "{4BAD6BB0-3ABB-4295-B870-2C9F2A9C54A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{4079C2E0-278F-49B1-89E1-761833BE37A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.Core", "..\src\Mozart.Composition.Core\Mozart.Composition.Core.csproj", "{936A52FE-2781-450D-A7BD-344E05B9712F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Composers", "Composers", "{45357E15-0217-4BFB-A00C-20BC74926418}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.ModelComposition.Pricing", "Mozart.Composition.ModelComposition.Pricing\Mozart.Composition.ModelComposition.Pricing.csproj", "{8B73241F-8E35-464B-9FB9-525B6D4523B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.ModelComposition.Details", "Mozart.Composition.ModelComposition.Details\Mozart.Composition.ModelComposition.Details.csproj", "{CC54F72C-E659-4588-80FA-85C986B2BB95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.ModelComposition.Stock", "Mozart.Composition.ModelComposition.Stock\Mozart.Composition.ModelComposition.Stock.csproj", "{70F59765-6379-48CB-BC48-6DD565361A6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9BE1C37F-A833-418F-9500-DC754333DDC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mozart.Composition.Shared", "Mozart.Composition.Shared\Mozart.Composition.Shared.csproj", "{71AA9519-D9C1-4947-9E9C-468EC5404201}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FDBCF9B-A73E-4B06-AE60-3AAB3B96DBA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FDBCF9B-A73E-4B06-AE60-3AAB3B96DBA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FDBCF9B-A73E-4B06-AE60-3AAB3B96DBA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FDBCF9B-A73E-4B06-AE60-3AAB3B96DBA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BAD6BB0-3ABB-4295-B870-2C9F2A9C54A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BAD6BB0-3ABB-4295-B870-2C9F2A9C54A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BAD6BB0-3ABB-4295-B870-2C9F2A9C54A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BAD6BB0-3ABB-4295-B870-2C9F2A9C54A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{936A52FE-2781-450D-A7BD-344E05B9712F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{936A52FE-2781-450D-A7BD-344E05B9712F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{936A52FE-2781-450D-A7BD-344E05B9712F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{936A52FE-2781-450D-A7BD-344E05B9712F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B73241F-8E35-464B-9FB9-525B6D4523B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B73241F-8E35-464B-9FB9-525B6D4523B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B73241F-8E35-464B-9FB9-525B6D4523B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B73241F-8E35-464B-9FB9-525B6D4523B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC54F72C-E659-4588-80FA-85C986B2BB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC54F72C-E659-4588-80FA-85C986B2BB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC54F72C-E659-4588-80FA-85C986B2BB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC54F72C-E659-4588-80FA-85C986B2BB95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F59765-6379-48CB-BC48-6DD565361A6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F59765-6379-48CB-BC48-6DD565361A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F59765-6379-48CB-BC48-6DD565361A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F59765-6379-48CB-BC48-6DD565361A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71AA9519-D9C1-4947-9E9C-468EC5404201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71AA9519-D9C1-4947-9E9C-468EC5404201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71AA9519-D9C1-4947-9E9C-468EC5404201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71AA9519-D9C1-4947-9E9C-468EC5404201}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4BAD6BB0-3ABB-4295-B870-2C9F2A9C54A0} = {4079C2E0-278F-49B1-89E1-761833BE37A8}
+		{936A52FE-2781-450D-A7BD-344E05B9712F} = {4079C2E0-278F-49B1-89E1-761833BE37A8}
+		{8B73241F-8E35-464B-9FB9-525B6D4523B3} = {45357E15-0217-4BFB-A00C-20BC74926418}
+		{CC54F72C-E659-4588-80FA-85C986B2BB95} = {45357E15-0217-4BFB-A00C-20BC74926418}
+		{70F59765-6379-48CB-BC48-6DD565361A6B} = {45357E15-0217-4BFB-A00C-20BC74926418}
+		{71AA9519-D9C1-4947-9E9C-468EC5404201} = {9BE1C37F-A833-418F-9500-DC754333DDC4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C36BBE8F-0223-4D4E-9B3C-2D17B6C29D4B}
+	EndGlobalSection
+EndGlobal
