@@ -12,7 +12,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Filters
     {
         private readonly ICachedServiceResolver<string, IHandleResult> _resultHandlerResolver;
 
-        internal CompositionResultActionFilter(ICachedServiceResolver<string, IHandleResult> resultHandlerResolver)
+        public CompositionResultActionFilter(ICachedServiceResolver<string, IHandleResult> resultHandlerResolver)
         {
             _resultHandlerResolver = resultHandlerResolver;        
         }
@@ -35,7 +35,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Filters
                 }
                 else
                 {
-                    var result = await handler.Handle(context.HttpContext);
+                    var result = await handler.HandleAsync(context.HttpContext);
                     ApplyResultToContext(resultContext, result);
                 }
             }

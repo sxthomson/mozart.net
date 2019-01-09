@@ -13,7 +13,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Predicates
     {
         public Func<ControllerActionDescriptor, bool> Predicate => x =>
         {
-            if (!x.ControllerTypeInfo.HasAttribute<MozartComposeModelAttribute>() && x.MethodInfo.HasAttribute<MozartComposeModelAttribute>())
+            if (!x.ControllerTypeInfo.HasAttribute<MozartComposeModelAttribute>() && x.MethodInfo.GetType().HasAttribute<MozartComposeModelAttribute>())
             {
                 return false;
             }

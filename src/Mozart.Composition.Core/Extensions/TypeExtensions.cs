@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
@@ -65,9 +66,5 @@ namespace Mozart.Composition.Core.Extensions
             return Attribute.GetCustomAttribute(memberType, typeof(TAttribute)) != null;
         }
 
-        public static bool HasAttribute<TAttribute>(this MemberInfo memberInfo) where TAttribute : Attribute
-        {
-            return HasAttribute<TAttribute>(memberInfo.GetType());
-        }
     }
 }

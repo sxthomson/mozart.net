@@ -5,11 +5,11 @@ namespace Mozart.Composition.Core.Abstractions
 {
     public abstract class ComposeModel<T> : IComposeModel<T>
     {
-        public async Task<object> Compose(IDictionary<string, object> parameters)
+        public async Task<object> ComposeAsync(IDictionary<string, object> parameters)
         {
-            return await ComposeOfT(parameters);
+            return await ComposeOfTAsync(parameters);
         }
 
-        public abstract Task<T> ComposeOfT(IDictionary<string, object> parameters);
+        public abstract Task<T> ComposeOfTAsync(IDictionary<string, object> parameters);
     }
 }
