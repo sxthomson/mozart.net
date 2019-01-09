@@ -51,12 +51,6 @@ namespace Mozart.Composition.AspNetCore.Mvc.DependencyInjection
             return serviceCollection;
         }
 
-        public static void AddMozartModelCompositionGlobally(this IServiceCollection serviceCollection)
-        {
-            // The result filter that orchestrates the composition of the result
-            serviceCollection.Configure<MvcOptions>(options => { options.Filters.Add<CompositionResultActionFilter>(); });
-        }
-
         private static void RegisterResultHandlerResolver(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IActionDescriptorReturnTypeProvider<ControllerActionDescriptor>, ControllerActionDescriptorReturnTypeProvider>();

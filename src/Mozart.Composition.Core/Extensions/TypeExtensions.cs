@@ -59,5 +59,15 @@ namespace Mozart.Composition.Core.Extensions
             var baseType = givenType.BaseType;
             return baseType != null && IsAssignableToGenericType(baseType, genericType);
         }
+
+        public static bool HasAttribute<TAttribute>(this Type memberType) where TAttribute : Attribute
+        {
+            return Attribute.GetCustomAttribute(memberType, typeof(TAttribute)) != null;
+        }
+
+        public static bool HasAttribute<TAttribute>(this MemberInfo memberInfo) where TAttribute : Attribute
+        {
+            return HasAttribute<TAttribute>(memberInfo.GetType());
+        }
     }
 }

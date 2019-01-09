@@ -3,7 +3,9 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Internal;
+using Mozart.Composition.AspNetCore.Mvc.Actions.Filters;
 using Mozart.Composition.AspNetCore.Mvc.Actions.Predicates.Abstractions;
+using Mozart.Composition.Core.Extensions;
 
 namespace Mozart.Composition.AspNetCore.Mvc.Actions.Predicates
 {
@@ -11,6 +13,11 @@ namespace Mozart.Composition.AspNetCore.Mvc.Actions.Predicates
     {
         public Func<ControllerActionDescriptor, bool> Predicate => x =>
         {
+            if (!x.ControllerTypeInfo.HasAttribute<MozartComposeModelAttribute>() && x.MethodInfo.HasAttribute<MozartComposeModelAttribute>())
+            {
+                return false;
+            }
+
             if (x.ActionConstraints == null || x.ActionConstraints.Any(ac =>
                     ac.GetType() == typeof(HttpMethodActionConstraint)))
             {
