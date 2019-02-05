@@ -2,12 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Mozart.Composition.AspNetCore.Mvc.Actions;
 using Mozart.Composition.AspNetCore.Mvc.Actions.Abstractions;
-using Mozart.Composition.AspNetCore.Mvc.Actions.Filters;
 using Mozart.Composition.AspNetCore.Mvc.Actions.Predicates;
 using Mozart.Composition.AspNetCore.Mvc.Actions.Predicates.Abstractions;
 using Mozart.Composition.AspNetCore.Mvc.Actions.ReturnTypes;
@@ -16,6 +14,7 @@ using Mozart.Composition.AspNetCore.Mvc.Actions.ReturnTypes.Strategies;
 using Mozart.Composition.AspNetCore.Mvc.Actions.ReturnTypes.Strategies.Abstractions;
 using Mozart.Composition.AspNetCore.Mvc.Results;
 using Mozart.Composition.AspNetCore.Mvc.Results.Abstractions;
+using Mozart.Composition.Core;
 using Mozart.Composition.Core.Abstractions;
 using Mozart.Composition.Core.DependencyInjection;
 using Mozart.Composition.Core.Extensions;
@@ -31,8 +30,11 @@ namespace Mozart.Composition.AspNetCore.Mvc.DependencyInjection
             // Register the IComposeModel<> types
             var composeModelTypes = serviceCollection.AddMozartModelComposition(fileNames);
 
-            // Register a default CompositionResultHandler to handle our composite view models 
-            serviceCollection.AddSingleton(typeof(IHandleResult<>), typeof(CompositionResultHandler<>));
+            // Register a default underlying IMozartModelComposer
+            serviceCollection.AddSingleton(typeof(IMozartModelComposer<>), typeof(MozartAggregateModelComposer<>));
+
+            // Register a default CompositionResultHandler wrap the default IMozartModelComposers for ASP.NET 
+            serviceCollection.AddSingleton(typeof(IHandleResult<>), typeof(CompositionResultHandler<>));        
 
             // Register an EntireResultHandler for each IComposeModel<T> - this allows each handler to be invoked directly if we only want to return a single property
             foreach (var type in composeModelTypes)

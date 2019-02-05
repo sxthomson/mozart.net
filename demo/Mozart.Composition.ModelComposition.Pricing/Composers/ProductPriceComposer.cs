@@ -7,7 +7,7 @@ namespace Mozart.Composition.ModelComposition.Pricing.Composers
 {
     public class ProductPriceComposer : ComposeModel<ProductPrice>
     {
-        public override async Task<ProductPrice> ComposeOfT(IDictionary<string, object> parameters)
+        public override async Task<ProductPrice> ComposeOfTAsync(IDictionary<string, object> parameters)
         {
             return new ProductPrice
             {

@@ -17,7 +17,7 @@ namespace Mozart.Composition.ModelComposition.Stock.Composers
             _productStockService = productStockService ?? throw new ArgumentNullException(nameof(productStockService));
         }
 
-        public override async Task<ProductStock> ComposeOfT(IDictionary<string, object> parameters)
+        public override async Task<ProductStock> ComposeOfTAsync(IDictionary<string, object> parameters)
         {
             var id = parameters.GetId();
 

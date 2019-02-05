@@ -17,7 +17,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Results
             _modelCompositionCachedServiceResolver = modelCompositionCachedServiceResolver;
         }
 
-        public override async Task<(T Model, int StatusCode)> HandleOfT(HttpContext context)
+        public override async Task<(T Model, int StatusCode)> HandleOfTAsync(HttpContext context)
         {
             // Leverage the IComposeModel implementation to create an entire result
             if (!_modelCompositionCachedServiceResolver.TryResolve(typeof(T), out var composeModel))
@@ -25,7 +25,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Results
                 return (null, StatusCodes.Status404NotFound);
             }
 
-            var result = (T) await composeModel.Compose(context.GetRouteData().Values);
+            var result = (T) await composeModel.ComposeAsync(context.GetRouteData().Values);
             return (result, StatusCodes.Status200OK);
         }
     }

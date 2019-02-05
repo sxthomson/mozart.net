@@ -7,23 +7,28 @@ namespace Mozart.Composition.AspNetCore.Mvc.Demo.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [MozartComposeModel]
+
     public class ProductController : ControllerBase
     {
         // GET: api/<controller>/{id}/IActionResult
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Product))]
+        [ProducesResponseType(404)]
         [Route("{id}/IActionResult")]
         public IActionResult GetProductIActionResult(int id)
         {
+            // This result is intercepted by the MozartComposeModel attribute
             return Ok();
         }
 
         // GET: api/<controller>/{id}/ActionResult
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Product))]
+        [ProducesResponseType(404)]
         [Route("{id}/ActionResult")]
         public ActionResult GetProductActionResult(int id)
         {
+            // This result is intercepted by the MozartComposeModel attribute
             return Ok();
         }
 
@@ -32,6 +37,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Demo.Controllers
         [Route("{id}/ActionResultOfT")]
         public ActionResult<Product> GetProductActionResultOfT(int id)
         {
+            // This result is intercepted by the MozartComposeModel attribute
             return Ok();
         }
 
@@ -40,6 +46,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Demo.Controllers
         [Route("{id}/ObjectResult")]
         public Product GetObjectResult(int id)
         {
+            // This result is intercepted by the MozartComposeModel attribute
             return null;
         }
     }

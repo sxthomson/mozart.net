@@ -5,6 +5,6 @@ namespace Mozart.Composition.Core.Abstractions
 {
     public interface IComposeModel
     { 
-        Task<object> Compose(IDictionary<string, object> parameters);
+        Task<object> ComposeAsync(IDictionary<string, object> parameters);
     }
 }
