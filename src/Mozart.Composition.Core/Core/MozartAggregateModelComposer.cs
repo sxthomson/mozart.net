@@ -41,7 +41,7 @@ namespace Mozart.Composition.Core
 
             if (pendingTasks.Count == 0)
             {
-                return null;
+                return default;
             }
 
             await Task.WhenAll(pendingTasks);

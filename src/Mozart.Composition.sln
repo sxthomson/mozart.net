@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.Core", "Mozart.Composition.Core\Mozart.Composition.Core.csproj", "{5FFD9864-12ED-4469-9C8F-7B3E7D785E96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mozart.Composition.AspNetCore.Mvc", "Mozart.Composition.AspNetCore.Mvc\Mozart.Composition.AspNetCore.Mvc.csproj", "{EB37B2E4-9E8A-4651-B339-3774C7954463}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.AspNetCore.Mvc", "Mozart.Composition.AspNetCore.Mvc\Mozart.Composition.AspNetCore.Mvc.csproj", "{EB37B2E4-9E8A-4651-B339-3774C7954463}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{46CD513F-B5BD-42D0-9AB8-DD8CFE9AA435}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mozart.Composition.AspNetCore.Mvc.UnitTests", "Mozart.Composition.AspNetCore.Mvc.UnitTests\Mozart.Composition.AspNetCore.Mvc.UnitTests.csproj", "{D3A2ED38-AB6C-4F32-9794-4C6A7514B21F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mozart.Composition.AspNetCore.Mvc.UnitTests", "Mozart.Composition.AspNetCore.Mvc.UnitTests\Mozart.Composition.AspNetCore.Mvc.UnitTests.csproj", "{D3A2ED38-AB6C-4F32-9794-4C6A7514B21F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mozart.Composition.Core.UnitTests", "Mozart.Composition.Core.UnitTests\Mozart.Composition.Core.UnitTests.csproj", "{371103CE-88A6-45E1-A120-DC9F471F8864}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +31,17 @@ Global
 		{D3A2ED38-AB6C-4F32-9794-4C6A7514B21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3A2ED38-AB6C-4F32-9794-4C6A7514B21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3A2ED38-AB6C-4F32-9794-4C6A7514B21F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{371103CE-88A6-45E1-A120-DC9F471F8864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{371103CE-88A6-45E1-A120-DC9F471F8864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{371103CE-88A6-45E1-A120-DC9F471F8864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{371103CE-88A6-45E1-A120-DC9F471F8864}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D3A2ED38-AB6C-4F32-9794-4C6A7514B21F} = {46CD513F-B5BD-42D0-9AB8-DD8CFE9AA435}
+		{371103CE-88A6-45E1-A120-DC9F471F8864} = {46CD513F-B5BD-42D0-9AB8-DD8CFE9AA435}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97243AAF-F02D-4A7D-95E9-D336DAC97F03}
