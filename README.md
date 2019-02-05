@@ -25,7 +25,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-At startup, Mozart .NET will scan your assemblies looking for your composers (more on that later!) and wire up the services required to add the auto composition when a model is to be returned via an action. You can optionally provide an overridden assembly search pattern for where your composers are declared, by default, this is `*ModelComposition*.
+At startup, Mozart .NET will scan your assemblies looking for your composers and wire up the services required to add the auto composition when a model is to be returned via an action. You can optionally provide an overridden assembly search pattern for where your composers are declared, by default, this is `*ModelComposition*.
 
 Secondly, as Mozart .NET resolves a composer per type, a lot of reflection needs to take place.  In order to ensure this happens before your web application is ready to serve requests add the following code to where you're configuring the request pipeline.  In a new templated web application in .NET Core, that will be in the `Configure` method in `Startup.cs`.
 
@@ -37,6 +37,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     ...
 }
 ```
+
+> Note that calling `WarmupMozartModelComposition` relies on you using `MozartComposeModelAttribute` to decorate your controllers or controller actions.  If you use inject the services then you may want to "warm" those up with your own code.
 
 ## Creating a composite model
 
@@ -69,7 +71,7 @@ public class ProductStock
     public bool IsLow { get; set; }
 }
 ```
-
+> Each property needs to be readable and writeable publically in order for Mozart .NET to resolve it at runtime.
 
 ## Registering IComposeModel implementations
 
@@ -128,6 +130,8 @@ public static class ServiceCollectionExtensions
 
 ## Wiring up the Composition
 
+Mozart .NET offers two different methods to construct your composite models:
+
 ### 1. Result Interception 
 
 ```c#
@@ -139,6 +143,7 @@ public class ProductController : ControllerBase
     // GET: api/<controller>/{id}
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(Product))]
+    [ProducesResponseType(404)]
     [Route("{id}")]
     public IActionResult Get(int id)
     {
@@ -153,21 +158,21 @@ public class ProductController : ControllerBase
 ```c#
 [Route("api/[controller]")]
 [ApiController]
-public class ProductAsyncController : ControllerBase
+public class ProductController : ControllerBase
 {
     private readonly IMozartModelComposer<Product> _productModelComposer;
 
-    public ProductAsyncController(IMozartModelComposer<Product> productModelComposer)
+    public ProductController(IMozartModelComposer<Product> productModelComposer)
     {
         _productModelComposer = productModelComposer ?? throw new ArgumentNullException(nameof(productModelComposer));
     }
 
-    // GET: api/<controller>/{id}/IActionResult
+    // GET: api/<controller>/{id}/
     [HttpGet]
     [ProducesResponseType(200, Type = typeof(Product))]
     [ProducesResponseType(404)]
     [Route("{id}/IActionResult")]
-    public async Task<IActionResult> GetProductIActionResult(int id)
+    public async Task<IActionResult> Get(int id)
     {
         var result = await _productModelComposer.BuildCompositeModelAsync(HttpContext.GetRouteData().Values);
 
@@ -181,6 +186,8 @@ public class ProductAsyncController : ControllerBase
 }
 ```
 
+> Remember When using injectable `IMozartModelComposer<T>`'s, Mozart .NET can't "warm up" the instances for you and the reflection of properties will take place when first resolved.  If you are particularly performance focused then look to resolve these before serving requests.
+
 # Inspiration
 
-This project was inspired by [Udi Dahan's](https://github.com/udidahan) excellent talk titled *"Own The Future NServiceBus Style"* which you can watch [here](https://www.youtube.com/watch?v=CCX8Sox6BNQ).  This is an attempt at creating a simple, read-only, strongly typed versiion of the framework he presented in this talk.
+This project was inspired by [Udi Dahan's](https://github.com/udidahan) excellent talk titled *"Own The Future NServiceBus Style"* which you can watch [here](https://www.youtube.com/watch?v=CCX8Sox6BNQ).  This is an attempt at creating a simple, read-only, strongly typed versiion of the framework he presented in this talk that I was lucky enough to see in person at ProgNET 2018 in London.
