@@ -9,11 +9,11 @@ namespace Mozart.Composition.AspNetCore.Mvc.Demo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductAsyncController : ControllerBase
+    public class ProductByServiceController : ControllerBase
     {
         private readonly IMozartModelComposer<Product> _productModelComposer;
 
-        public ProductAsyncController(IMozartModelComposer<Product> productModelComposer)
+        public ProductByServiceController(IMozartModelComposer<Product> productModelComposer)
         {
             _productModelComposer = productModelComposer ?? throw new ArgumentNullException(nameof(productModelComposer));
         }

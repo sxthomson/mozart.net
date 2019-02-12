@@ -190,4 +190,4 @@ public class ProductController : ControllerBase
 
 # Inspiration
 
-This project was inspired by [Udi Dahan's](https://github.com/udidahan) excellent talk titled *"Own The Future NServiceBus Style"* which you can watch [here](https://www.youtube.com/watch?v=CCX8Sox6BNQ).  This is an attempt at creating a simple, read-only, strongly typed versiion of the framework he presented in this talk that I was lucky enough to see in person at ProgNET 2018 in London.
+This project was inspired by [Udi Dahan's](https://github.com/udidahan) excellent talk titled *"Own The Future NServiceBus Style"* which you can watch [here](https://www.youtube.com/watch?v=CCX8Sox6BNQ).  This is an attempt at creating a simple, read-only, strongly typed version of the framework he presented in this talk that I was lucky enough to see in person at ProgNET 2018 in London.
