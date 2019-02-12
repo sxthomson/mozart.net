@@ -9,11 +9,11 @@ namespace Mozart.Composition.ModelComposition.Details.Composers
     {
         public override async Task<ProductDetails> ComposeOfTAsync(IDictionary<string, object> parameters)
         {
-            return new ProductDetails
+            return await Task.FromResult(new ProductDetails
             {
                 Title = "Sample Product",
                 Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            };
+            });
         }
     }
 }

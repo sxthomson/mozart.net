@@ -23,7 +23,7 @@ namespace Mozart.Composition.AspNetCore.Mvc.Demo
         {
             services.AddMvc();            
             services.AddMozartMvcComposition();
-            services.AddDependentServicesForModelComposition(Configuration);            
+            services.ScanForAndRegisterServicesForMozartByConvention(Configuration);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
