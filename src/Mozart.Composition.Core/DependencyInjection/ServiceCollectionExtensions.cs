@@ -29,7 +29,7 @@ namespace Mozart.Composition.Core.DependencyInjection
             return services.RegisterComposeModels(fileNames);
         }
 
-        public static void AddDependentServicesForModelComposition(this IServiceCollection services, IConfiguration configuration, string assemblySearchPattern = "*ModelComposition*.dll")
+        public static void ScanForAndRegisterServicesForMozartByConvention(this IServiceCollection services, IConfiguration configuration, string assemblySearchPattern = "*ModelComposition*.dll")
         {
             var fileNames = Directory.GetFiles(AppContext.BaseDirectory, assemblySearchPattern);
 

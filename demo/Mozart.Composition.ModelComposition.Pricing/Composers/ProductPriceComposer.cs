@@ -9,10 +9,10 @@ namespace Mozart.Composition.ModelComposition.Pricing.Composers
     {
         public override async Task<ProductPrice> ComposeOfTAsync(IDictionary<string, object> parameters)
         {
-            return new ProductPrice
+            return await Task.FromResult(new ProductPrice
             {
                 Price = 12.0m
-            };
+            });
         }
     }
 }

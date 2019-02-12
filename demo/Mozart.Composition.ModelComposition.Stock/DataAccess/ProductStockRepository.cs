@@ -5,9 +5,9 @@ namespace Mozart.Composition.ModelComposition.Stock.DataAccess
 {
     public class ProductStockRepository : IReadOnlyRepository<int, int>
     {
-        public Task<int> GetAsync(int key)
+        public async Task<int> GetAsync(int key)
         {
-            return Task.FromResult(20);
+            return await Task.FromResult(20);
         }
     }
 }

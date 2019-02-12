@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Mozart.Composition.ModelComposition.Stock.Configuration;
-using Mozart.Composition.ModelComposition.Stock.DataAccess;
 using Mozart.Composition.ModelComposition.Stock.Models;
 using Mozart.Composition.Shared.DataAccess;
 
