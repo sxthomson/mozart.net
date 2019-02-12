@@ -38,7 +38,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-> Note that calling `WarmupMozartModelComposition` relies on you using `MozartComposeModelAttribute` to decorate your controllers or controller actions.  If you use inject the services then you may want to "warm" those up with your own code.
+> Note that calling `WarmupMozartModelComposition` relies on you using `MozartComposeModelAttribute` to decorate your controllers or controller actions.  If you decide you'd rather inject the `IMozartModelComposer` services as dependencies then you may want to "warm" those up yourself.
 
 ## Creating a composite model
 
