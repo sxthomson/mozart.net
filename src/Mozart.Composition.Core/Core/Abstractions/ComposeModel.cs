@@ -7,6 +7,7 @@ namespace Mozart.Composition.Core.Abstractions
     {
         public async Task<object> ComposeAsync(IDictionary<string, object> parameters)
         {
+            // Implicitly cast down to object to save more reflection at runtime
             return await ComposeOfTAsync(parameters);
         }
 
